@@ -32,6 +32,9 @@ class Validator
         return $this->errors;
     }
 
+    /**
+     * @throws DataStatusResponse
+     */
     protected function applyRule($field, $rule)
     {
         $params = explode(':', $rule);
@@ -41,49 +44,67 @@ class Validator
             $this->$methodName($field, $params);
         } else {
             // throw new \Exception("Validation rule {$params[0]} does not exist.");
-            throw new DataStatusResponse( true, 0, "Validation rule {$params[0]} does not exist.", 203, ['status_msg' => 'warning'] );
+            throw new DataStatusResponse( true, 0, [],203, "Validation rule {$params[0]} does not exist.", ['status_msg' => 'warning'] );
         }
     }
 
 
+    /**
+     * @throws DataStatusResponse
+     */
     protected function validateRequired($field, $params)
     {
         if (!isset($this->data[$field]) || empty($this->data[$field]))
-            throw new DataStatusResponse( true, 0, "The {$this->getFieldName($field)} field is required.", 203, ['status_msg' => 'warning'] );
+            throw new DataStatusResponse( true, 0, [], 203, "The {$this->getFieldName($field)} field is required.", ['status_msg' => 'warning'] );
     }
 
+    /**
+     * @throws DataStatusResponse
+     */
     protected function validateString($field, $params)
     {
         if (!is_string($this->data[$field])) 
-            throw new DataStatusResponse( true, 0, "The {$this->getFieldName($field)} must be a string.", 203, ['status_msg' => 'warning'] );
+            throw new DataStatusResponse( true, 0, [], 203, "The {$this->getFieldName($field)} must be a string.", ['status_msg' => 'warning'] );
     }
 
+    /**
+     * @throws DataStatusResponse
+     */
     protected function validateInt($field, $params)
     {
         if (!is_int($this->data[$field])) 
-            throw new DataStatusResponse( true, 0, "The {$this->getFieldName($field)} must be a int.", 203, ['status_msg' => 'warning'] );
+            throw new DataStatusResponse( true, 0, [], 203, "The {$this->getFieldName($field)} must be a int.", ['status_msg' => 'warning'] );
     }
 
+    /**
+     * @throws DataStatusResponse
+     */
     protected function validateEmail($field, $params)
     {
         if (!filter_var($this->data[$field], FILTER_VALIDATE_EMAIL))
-            throw new DataStatusResponse( true, 0, "The {$this->getFieldName($field)} must be a valid email address.", 203, ['status_msg' => 'warning'] );
+            throw new DataStatusResponse( true, 0, [], 203, "The {$this->getFieldName($field)} must be a valid email address.", ['status_msg' => 'warning'] );
     }
 
+    /**
+     * @throws DataStatusResponse
+     */
     protected function validateMin($field, $params)
     {
         $minLength = (int) $params[1];
 
         if (strlen($this->data[$field]) < $minLength)
-            throw new DataStatusResponse( true, 0, "The {$this->getFieldName($field)} must be at least {$minLength} characters.", 203, ['status_msg' => 'warning'] );
+            throw new DataStatusResponse( true, 0, [], 203, "The {$this->getFieldName($field)} must be at least {$minLength} characters.", ['status_msg' => 'warning'] );
     }
 
+    /**
+     * @throws DataStatusResponse
+     */
     protected function validateMax($field, $params)
     {
         $maxLength = (int) $params[1];
 
         if (strlen($this->data[$field]) > $maxLength) 
-            throw new DataStatusResponse( true, 0, "The {$this->getFieldName($field)} must be at least {$maxLength} characters.", 203, ['status_msg' => 'warning'] );
+            throw new DataStatusResponse( true, 0, [], 203, "The {$this->getFieldName($field)} must be at least {$maxLength} characters.", ['status_msg' => 'warning'] );
     }
 
     protected function validateAlpha($field, $params)
@@ -107,12 +128,15 @@ class Validator
         }
     }
 
+    /**
+     * @throws DataStatusResponse
+     */
     protected function validateNoSpecialCharacters($field, $params)
     {
 		if (!empty($this->data[$field])) {
 			if (is_null(json_decode($this->data[$field]))) { // Por si pasamos un string en formato json nos lo deje pasar
 				if (!preg_match('/^[0-9a-zA-Z\-ñÑáéíóúÁÉÍÓÚ@()+.,_ ]+$/', $this->data[$field])){
-					throw new DataStatusResponse( true, 0, "El campo {$this->getFieldName($field)} tiene caracteres especiales no permitidos.", 203, ['status_msg' => 'warning'] );
+					throw new DataStatusResponse( true, 0, [], 203, "El campo {$this->getFieldName($field)} tiene caracteres especiales no permitidos.", ['status_msg' => 'warning'] );
 				}
 			}
 		}

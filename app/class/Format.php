@@ -10,9 +10,9 @@ removeAccent:   Remplaza los caracteres que tienen acentos (incluye la ñ)
 class Format
 {
     protected $data;
-    protected $errors = [];
+    protected array $errors = [];
 
-    private $data_response = array();
+    private array $data_response = array();
 
     public function __construct($data)
     {
@@ -36,6 +36,9 @@ class Format
         return $this->errors;
     }
 
+    /**
+     * @throws DataStatusResponse
+     */
     protected function applyRule($field, $rule)
     {
         $params = explode(':', $rule);
@@ -49,6 +52,9 @@ class Format
     }
 
 
+    /**
+     * @throws DataStatusResponse
+     */
     protected function transmuteUppercase($field, $params)
     {
         if (!is_string($this->data[$field])) 
@@ -57,6 +63,9 @@ class Format
         $this->data_response[$field] = mb_strtoupper($this->data[$field], 'UTF-8');
     }
 
+    /**
+     * @throws DataStatusResponse
+     */
     protected function transmuteLowercase($field, $params)
     {
         if (!is_string($this->data[$field]))
@@ -94,6 +103,9 @@ class Format
         $this->data_response[$field] = strtr($this->data[$field], $caracteres);
     }
 
+    /**
+     * @throws DataStatusResponse
+     */
     protected function transmuteNumeric($field, $params)
     {
         if (!is_numeric($this->data[$field])) 

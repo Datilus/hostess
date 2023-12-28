@@ -2,14 +2,14 @@
 
 class DataValidate {
 
-    private $utilerias;
+    private Utilerias $utilerias;
 
     /**
      * Values data.
      *
      * @var array
      */
-    public $params_value = array(
+    public array $params_value = array(
 
         'value' => '',
 
@@ -30,15 +30,18 @@ class DataValidate {
     }
 
 
-    public function rules_value( $options_rules )
+    /**
+     * @throws DataStatusResponse
+     */
+    public function rules_value($options_rules )
     {
         // Remplazamos vocales con acentos y las ñ
         $options_rules["value"] = $this->utilerias->quitarCaracteres($options_rules["value"]);
 
 
         // Validar caracteres especiales
-        if ( $this->utilerias->caracteres_especiales($options_rules["value"]) == false && $options_rules["allow_special_characters"] == false )
-            throw new DataStatusResponse( true, 0, 'El campo '. trim($options_rules['name']) .' tiene caracteres especiales no permitidos.', 203, ['status_msg' => 'warning'] );
+        if ( !$this->utilerias->caracteres_especiales($options_rules["value"]) && !$options_rules["allow_special_characters"])
+            throw new DataStatusResponse( true, 0, [], 203, 'El campo '. trim($options_rules['name']) .' tiene caracteres especiales no permitidos.', ['status_msg' => 'warning'] );
 
 
         // Quitamos espacios
@@ -46,8 +49,8 @@ class DataValidate {
 
 
         // Requerido
-        if ( empty($options_rules['value']) && $options_rules['is_required'] == true)
-            throw new DataStatusResponse( true, 0, 'El campo '. trim($options_rules['name']) .' es requerido.', 203, ['status_msg' => 'warning'] );
+        if ( empty($options_rules['value']) && $options_rules['is_required'])
+            throw new DataStatusResponse( true, 0, [], 203, 'El campo '. trim($options_rules['name']) .' es requerido.', ['status_msg' => 'warning'] );
 
 
         // Convertimos a mayúsculas o minúsculas
