@@ -15,17 +15,25 @@ class UsuarioModel extends Usuario_
     
     // CONSULTAS
     //----------------------------------------
-    public function getFromDataBase()
+    /**
+     * @throws DataStatusResponse
+     */
+    public function getFromDataBase($ban, $criteria): array
     {
-        $query = "CALL sp_obtenerUsuario(
-            '{$this->dataReadParams['ban']}',
-            '{$this->dataReadParams['search']}'
+        $query = "CALL sp_obtener_usuario(
+            '$ban',
+            '$criteria'
         )";
 
         $consulta = $this->conexion->query($query);
         $respuesta = $this->conexion->consulta_assoc($consulta);
 
         $this->conexion->next_result();
+
+        if (!is_array($respuesta)) {
+            throw new DataStatusResponse(true, 0, [], 404, "No data founded", []);
+        }
+
         return $respuesta;
     }
 
@@ -131,5 +139,3 @@ class UsuarioModel extends Usuario_
 
 
 }
-
-?>

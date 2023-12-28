@@ -4,7 +4,7 @@ interface UsuarioRepositoryInterface
 {
     public function findAll();
 
-    public function find($id);
+    public function getByKey($key);
 
     public function create(array $data);
 
@@ -15,8 +15,7 @@ interface UsuarioRepositoryInterface
 
 class UsuarioRepository implements UsuarioRepositoryInterface 
 {
-    // private $usuario;
-    private $usuarioModel;
+    private UsuarioModel $usuarioModel;
 
     public function __construct()
     {
@@ -29,13 +28,20 @@ class UsuarioRepository implements UsuarioRepositoryInterface
         // return User::all();
     }
 
-    public function find($id)
+    /**
+     * @throws DataStatusResponse
+     */
+    public function getByKey($key): array
     {
-        // return User::find($id);
-        return $this->usuarioModel
-        ->set_id_usuario($id)
-        ->DataToGetUsuarioById()
-        ->getFromDataBase();
+        return $this->usuarioModel->getFromDataBase(1, $key);
+    }
+
+    /**
+     * @throws DataStatusResponse
+     */
+    public function getById($id): array
+    {
+        return $this->usuarioModel->getFromDataBase(2, $id);
     }
 
     public function findUserExist($username)
