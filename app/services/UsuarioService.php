@@ -16,36 +16,40 @@ class UsuarioService
     {
         $format = new Format($data);
         $data = $format->transmute([
-            'key_usuario'    => 'numeric|trim'
+            'key_user'    => 'numeric|trim',
+            'system'      => 'uppercase|trim'
         ]);
         $data = $format->get_data_response();
 
 
         $validator = new Validator($data);
         $validator->validate([
-            'key_usuario'    => 'noSpecialCharacters'
+            'key_user'    => 'noSpecialCharacters',
+            'system'      => 'noSpecialCharacters|alpha'
         ]);
 
-        return $this->usuarioRepository->getByKey($data['key_usuario']);
+        return $this->usuarioRepository->getByKey($data);
     }
 
     /**
      * @throws DataStatusResponse
      */
-    public function getById($data): array
+    public function getByNumber($data): array
     {
         $format = new Format($data);
         $data = $format->transmute([
-            'id_usuario'    => 'numeric|trim'
+            'number_user'    => 'numeric|trim',
+            'system'         => 'uppercase|trim'
         ]);
         $data = $format->get_data_response();
 
 
         $validator = new Validator($data);
         $validator->validate([
-            'id_usuario'    => 'noSpecialCharacters'
+            'number_user'    => 'noSpecialCharacters',
+            'system'         => 'noSpecialCharacters|alpha'
         ]);
-        return $this->usuarioRepository->getById($data['id_usuario']);
+        return $this->usuarioRepository->getByNumber($data);
     }
 
 }

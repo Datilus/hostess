@@ -107,9 +107,13 @@ class Validator
             throw new DataStatusResponse( true, 0, [], 203, "The {$this->getFieldName($field)} must be at least {$maxLength} characters.", ['status_msg' => 'warning'] );
     }
 
+    /**
+     * @throws DataStatusResponse
+     */
     protected function validateAlpha($field, $params)
     {
         if (!ctype_alpha($this->data[$field])) {
+            throw new DataStatusResponse(true, 0, [], 203, "The {$this->getFieldName($field)} may only contain letters.", ['status_msg' => 'warning']);
             // $this->addError($field, "The {$field} may only contain letters.");
         }
     }

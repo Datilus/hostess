@@ -4,7 +4,7 @@ interface UsuarioRepositoryInterface
 {
     public function findAll();
 
-    public function getByKey($key);
+    public function getByKey($data);
 
     public function create(array $data);
 
@@ -19,7 +19,6 @@ class UsuarioRepository implements UsuarioRepositoryInterface
 
     public function __construct()
     {
-        // $this->usuario = new Usuario_();
         $this->usuarioModel = new UsuarioModel();
     }
 
@@ -31,17 +30,19 @@ class UsuarioRepository implements UsuarioRepositoryInterface
     /**
      * @throws DataStatusResponse
      */
-    public function getByKey($key): array
+    public function getByKey($data): array
     {
-        return $this->usuarioModel->getFromDataBase(1, $key);
+        $criteria = $data['key_user'] . '|' . $data['system'];
+        return $this->usuarioModel->getFromDataBase(2, $criteria);
     }
 
     /**
      * @throws DataStatusResponse
      */
-    public function getById($id): array
+    public function getByNumber($data): array
     {
-        return $this->usuarioModel->getFromDataBase(2, $id);
+        $criteria = $data['number_user'] . '|' . $data['system'];
+        return $this->usuarioModel->getFromDataBase(1, $criteria);
     }
 
     public function findUserExist($username)

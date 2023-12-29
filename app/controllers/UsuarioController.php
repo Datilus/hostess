@@ -2,8 +2,7 @@
 //session_start();
 
 //Heredamos Controlador para poder tener acceso al método modelo y método vista
-class Usuario extends Controller 
-{
+class Usuario {
 
 	private UsuarioService $usuarioService;
 
@@ -16,24 +15,37 @@ class Usuario extends Controller
 	//Todo controlador debe tener un metodo index
 	public function index() 
 	{
-        echo "Hola mundo";
+        return new DataStatusResponse(true, 404, [],404, "Not Found", []);
 	}
 
-    public function getByKey($parametrosURL): DataStatusResponse
+    /**
+     * @throws DataStatusResponse
+     */
+    public function getByKey($parametersURL): DataStatusResponse
     {
-        $data['key_usuario'] = $parametrosURL[0];
-        $data['sistema'] = $parametrosURL[1];
+        if ($_SERVER['REQUEST_METHOD'] != 'GET') {
+            return new DataStatusResponse(true, 405, [],405, "Method Not Allowed", []);
+        }
+        $data['key_user'] = $parametersURL[0];
+        $data['system'] = $parametersURL[1];
         $response = $this->usuarioService->getByKey($data);
 
-        return new DataStatusResponse(false, 0, [],200, "Usuario encontrado", ['data' => $response]);
+        return new DataStatusResponse(false, 0, [],200, "Usuario encontrado", [$response]);
     }
 
-    public function getById($parametrosURL): DataStatusResponse
+    /**
+     * @throws DataStatusResponse
+     */
+    public function getByNumber($parametersURL): DataStatusResponse
     {
-        $data['id_usuario'] = $parametrosURL[0];
-        $response = $this->usuarioService->getById($data);
+        if ($_SERVER['REQUEST_METHOD'] != 'GET') {
+            return new DataStatusResponse(true, 405, [],405, "Method Not Allowed", []);
+        }
+        $data['number_user'] = $parametersURL[0];
+        $data['system'] = $parametersURL[1];
+        $response = $this->usuarioService->getByNumber($data);
 
-        return new DataStatusResponse(false, 0, [], 200, 'Usuario encontrado', ['data' => $response]);
+        return new DataStatusResponse(false, 0, [], 200, 'Usuario encontrado', [$response]);
     }
 
 }
