@@ -1,7 +1,5 @@
 <?php
-//session_start();
 
-//Heredamos Controlador para poder tener acceso al método modelo y método vista
 class Usuario {
 
 	private UsuarioService $usuarioService;
@@ -13,8 +11,8 @@ class Usuario {
 
 
 	//Todo controlador debe tener un metodo index
-	public function index() 
-	{
+	public function index(): DataStatusResponse
+    {
         return new DataStatusResponse(true, 404, [],404, "Not Found", []);
 	}
 
