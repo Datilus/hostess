@@ -9,6 +9,21 @@ class UsuarioService
         $this->usuarioRepository = new UsuarioRepository();
     }
 
+    public function getAccess($data)
+    {
+        $url = "http://192.168.9.110/apis/login/usuario/getByNumber/" . $data['txt_colaborador'] . "/restaurantes";
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        $response = preg_replace('/[\x{200B}-\x{200D}\x{FEFF}]/u', '', $response);
+
+        return json_decode($response, true);
+    }
+
     /**
      * @throws DataStatusResponse
      */
@@ -20,7 +35,6 @@ class UsuarioService
             'system'      => 'uppercase|trim'
         ]);
         $data = $format->get_data_response();
-
 
         $validator = new Validator($data);
         $validator->validate([

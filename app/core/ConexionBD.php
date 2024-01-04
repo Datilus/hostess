@@ -7,7 +7,7 @@ class ConexionBD{
 	private $servidor = 'localhost';
 	private $usuario = 'root';
 	private $pass = '';
-	private $BD = 'palace_main';
+	private $BD = 'palace_restaurantes';
 	private $conectarBD;
 
 
