@@ -10,10 +10,10 @@ class Restaurante
         $this->restauranteService = new RestauranteService();
     }
 
-    public function agregar(): DataStatusResponse
+    public function agregar(): void
     {
         if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-            return new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
+            new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
         }
 
         $json = file_get_contents('php://input');
@@ -22,19 +22,19 @@ class Restaurante
         $response = $this->restauranteService->saveRestaurant($data);
 
         if (!$response['ERROR']) {
-            return new DataStatusResponse(false, 0, [], 201, 'Categoria creada', [$response]);
+            new DataStatusResponse(false, 0, [], 201, 'Categoria creada', [$response]);
         } else {
-            return new DataStatusResponse(true, 404, [], 404, 'Error al crear restaurante', []);
+            new DataStatusResponse(true, 404, [], 404, 'Error al crear restaurante', []);
         }
     }
 
-    public function actualizar($parametersURL): DataStatusResponse
+    public function actualizar($parametersURL): void
     {
         if ($_SERVER['REQUEST_METHOD'] != 'PUT') {
-            return new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
+            new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
         }
         if (empty($parametersURL)) {
-            return new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
+            new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
         }
 
         $json          = file_get_contents('php://input');
@@ -44,22 +44,22 @@ class Restaurante
         $response = $this->restauranteService->saveRestaurant($data);
 
         if (!$response['ERROR']) {
-            return new DataStatusResponse(false, 0, [], 200, 'Restaurante actualizado', [$response]);
+            new DataStatusResponse(false, 0, [], 200, 'Restaurante actualizado', [$response]);
         } else {
-            return new DataStatusResponse(true, 404, [], 404, 'Error al actualizar restaurante', []);
+            new DataStatusResponse(true, 404, [], 404, 'Error al actualizar restaurante', []);
         }
     }
 
     /**
      * @throws DataStatusResponse
      */
-    public function encabezado($parametersURL): DataStatusResponse
+    public function encabezado($parametersURL): void
     {
         if ($_SERVER['REQUEST_METHOD'] != 'GET') {
-            return new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
+            new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
         }
         if (empty($parametersURL)) {
-            return new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
+            new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
         }
 
         $data['flag'] = 2;
@@ -67,19 +67,19 @@ class Restaurante
 
         $response = $this->restauranteService->getRestaurant($data);
 
-        return new DataStatusResponse(false, 0, [], 200, 'Restaurante encontrado', [$response]);
+        new DataStatusResponse(false, 0, [], 200, 'Restaurante encontrado', [$response]);
     }
 
     /**
      * @throws DataStatusResponse
      */
-    public function detalle($parametersURL): DataStatusResponse
+    public function detalle($parametersURL): void
     {
         if ($_SERVER['REQUEST_METHOD'] != 'GET') {
-            return new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
+            new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
         }
         if (empty($parametersURL)) {
-            return new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
+            new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
         }
 
         $data['flag'] = 1;
@@ -87,6 +87,6 @@ class Restaurante
 
         $response = $this->restauranteService->getRestaurant($data);
 
-        return new DataStatusResponse(false, 0, [], 200, 'Restaurante encontrado', [$response]);
+        new DataStatusResponse(false, 0, [], 200, 'Restaurante encontrado', [$response]);
     }
 }

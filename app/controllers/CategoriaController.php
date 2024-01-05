@@ -9,10 +9,10 @@ class Categoria
         $this->categoriaService = new CategoriaService();
     }
 
-    public function agregar(): DataStatusResponse
+    public function agregar(): void
     {
         if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-            return new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
+            new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
         }
 
         $json = file_get_contents('php://input');
@@ -21,19 +21,19 @@ class Categoria
         $response = $this->categoriaService->saveCategory($data);
 
         if (!$response['ERROR']) {
-            return new DataStatusResponse(false, 0, [], 201, 'Categoria creada', [$response]);
+            new DataStatusResponse(false, 0, [], 201, 'Categoria creada', [$response]);
         } else {
-            return new DataStatusResponse(true, 404, [], 404, 'Error al crear categoria', []);
+            new DataStatusResponse(true, 404, [], 404, 'Error al crear categoria', []);
         }
     }
 
-    public function actualizar($parametersURL): DataStatusResponse
+    public function actualizar($parametersURL): void
     {
         if ($_SERVER['REQUEST_METHOD'] != 'PUT') {
-            return new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
+            new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
         }
         if (empty($parametersURL)) {
-            return new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
+            new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
         }
 
         $json          = file_get_contents('php://input');
@@ -43,22 +43,22 @@ class Categoria
         $response = $this->categoriaService->saveCategory($data);
 
         if (!$response['ERROR']) {
-            return new DataStatusResponse(false, 0, [], 200, 'Categoria actualizada', [$response]);
+            new DataStatusResponse(false, 0, [], 200, 'Categoria actualizada', [$response]);
         } else {
-            return new DataStatusResponse(true, 404, [], 404, 'Error al actualizar categoria', []);
+            new DataStatusResponse(true, 404, [], 404, 'Error al actualizar categoria', []);
         }
     }
 
     /**
      * @throws DataStatusResponse
      */
-    public function encabezado($parametersURL): DataStatusResponse
+    public function encabezado($parametersURL): void
     {
         if ($_SERVER['REQUEST_METHOD'] != 'GET') {
-            return new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
+            new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
         }
         if (empty($parametersURL)) {
-            return new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
+            new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
         }
 
         $data['flag']          = 1;
@@ -67,19 +67,19 @@ class Categoria
 
         $response = $this->categoriaService->getCategories($data);
 
-        return new DataStatusResponse(false, 0, [], 200, 'Categoria encontrada', $response);
+        new DataStatusResponse(false, 0, [], 200, 'Categoria encontrada', $response);
     }
 
     /**
      * @throws DataStatusResponse
      */
-    public function detalle($parametersURL): DataStatusResponse
+    public function detalle($parametersURL): void
     {
         if ($_SERVER['REQUEST_METHOD'] != 'GET') {
-            return new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
+            new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
         }
         if (empty($parametersURL)) {
-            return new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
+            new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
         }
 
         $data['flag']          = 2;
@@ -88,19 +88,19 @@ class Categoria
 
         $response = $this->categoriaService->getCategories($data);
 
-        return new DataStatusResponse(false, 0, [], 200, 'Categoria encontrada', $response);
+        new DataStatusResponse(false, 0, [], 200, 'Categoria encontrada', $response);
     }
 
     /**
      * @throws DataStatusResponse
      */
-    public function restaurante($parametersURL): DataStatusResponse
+    public function restaurante($parametersURL): void
     {
         if ($_SERVER['REQUEST_METHOD'] != 'GET') {
-            return new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
+            new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
         }
         if (empty($parametersURL)) {
-            return new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
+            new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
         }
 
         $data['flag']          = 3;
@@ -109,6 +109,6 @@ class Categoria
 
         $response = $this->categoriaService->getCategories($data);
 
-        return new DataStatusResponse(false, 0, [], 200, 'Categoria encontrada', $response);
+        new DataStatusResponse(false, 0, [], 200, 'Categoria encontrada', $response);
     }
 }

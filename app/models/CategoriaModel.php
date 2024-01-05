@@ -47,9 +47,10 @@ class CategoriaModel
         $this->conexionBD->next_result();
 
         if (empty($response)) {
-            throw new DataStatusResponse(true, 404, [], 404, "No data founded", []);
+            new DataStatusResponse(true, 404, [], 404, "No data founded", []);
         }
 
         return $response;
     }
+
 }

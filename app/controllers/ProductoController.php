@@ -9,10 +9,10 @@ class Producto
         $this->productoService = new ProductoService();
     }
 
-    public function agregar(): DataStatusResponse
+    public function agregar(): void
     {
         if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-            return new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
+            new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
         }
 
         $json = file_get_contents('php://input');
@@ -21,19 +21,19 @@ class Producto
         $response = $this->productoService->saveProduct($data);
 
         if (!$response['ERROR']) {
-            return new DataStatusResponse(false, 0, [], 201, 'Producto creado', [$response]);
+            new DataStatusResponse(false, 0, [], 201, 'Producto creado', [$response]);
         } else {
-            return new DataStatusResponse(true, 404, [], 404, 'Error al crear producto', []);
+            new DataStatusResponse(true, 404, [], 404, 'Error al crear producto', []);
         }
     }
 
-    public function actualizar($parametersURL): DataStatusResponse
+    public function actualizar($parametersURL): void
     {
         if ($_SERVER['REQUEST_METHOD'] != 'PUT') {
-            return new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
+            new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
         }
         if (empty($parametersURL)) {
-            return new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
+            new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
         }
 
         $json          = file_get_contents('php://input');
@@ -43,22 +43,22 @@ class Producto
         $response = $this->productoService->saveProduct($data);
 
         if (!$response['ERROR']) {
-            return new DataStatusResponse(false, 0, [], 200, 'Producto actualizado', [$response]);
+            new DataStatusResponse(false, 0, [], 200, 'Producto actualizado', [$response]);
         } else {
-            return new DataStatusResponse(true, 404, [], 404, 'Error al actualizar producto', []);
+            new DataStatusResponse(true, 404, [], 404, 'Error al actualizar producto', []);
         }
     }
 
     /**
      * @throws DataStatusResponse
      */
-    public function encabezado($parametersURL): DataStatusResponse
+    public function encabezado($parametersURL): void
     {
         if ($_SERVER['REQUEST_METHOD'] != 'GET') {
-            return new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
+            new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
         }
         if (empty($parametersURL)) {
-            return new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
+            new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
         }
 
         $data['flag'] = 1;
@@ -66,19 +66,19 @@ class Producto
 
         $response = $this->productoService->getProductsByFlag($data);
 
-        return new DataStatusResponse(false, 0, [], 200, 'Producto encontrado', $response);
+        new DataStatusResponse(false, 0, [], 200, 'Producto encontrado', $response);
     }
 
     /**
      * @throws DataStatusResponse
      */
-    public function detalle($parametersURL): DataStatusResponse
+    public function detalle($parametersURL): void
     {
         if ($_SERVER['REQUEST_METHOD'] != 'GET') {
-            return new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
+            new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
         }
         if (empty($parametersURL)) {
-            return new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
+            new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
         }
 
         $data['flag'] = 2;
@@ -86,19 +86,19 @@ class Producto
 
         $response = $this->productoService->getProductsByFlag($data);
 
-        return new DataStatusResponse(false, 0, [], 200, 'Producto encontrado', $response);
+        new DataStatusResponse(false, 0, [], 200, 'Producto encontrado', $response);
     }
 
     /**
      * @throws DataStatusResponse
      */
-    public function porRestaurante($parametersURL): DataStatusResponse
+    public function porRestaurante($parametersURL): void
     {
         if ($_SERVER['REQUEST_METHOD'] != 'GET') {
-            return new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
+            new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
         }
         if (empty($parametersURL)) {
-            return new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
+            new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
         }
 
         $data['flag']          = 3;
@@ -106,16 +106,16 @@ class Producto
 
         $response = $this->productoService->getProductsByRestaurant($data);
 
-        return new DataStatusResponse(false, 0, [], 200, 'Productos encontrados', $response);
+        new DataStatusResponse(false, 0, [], 200, 'Productos encontrados', $response);
     }
 
     /**
      * @throws DataStatusResponse
      */
-    public function restauranteYcategoria(): DataStatusResponse
+    public function restauranteYcategoria(): void
     {
         if ($_SERVER['REQUEST_METHOD'] != 'GET') {
-            return new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
+            new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
         }
 
         $json         = file_get_contents('php://input');
@@ -124,6 +124,6 @@ class Producto
 
         $response = $this->productoService->getProductsByRestaurantAndCategory($data);
 
-        return new DataStatusResponse(false, 0, [], 200, 'Productos encontrados', $response);
+        new DataStatusResponse(false, 0, [], 200, 'Productos encontrados', $response);
     }
 }

@@ -3,13 +3,13 @@
 class UsuarioModel
 {
     public ConexionBD $conexion;
-    
+
     public function __construct()
     {
         $this->conexion = ConexionBD::obtenerInstancia();
     }
 
-    
+
     // CONSULTAS
     //----------------------------------------
     /**
@@ -22,16 +22,16 @@ class UsuarioModel
             '$criteria'
         )";
 
-        $consulta = $this->conexion->query($query);
-        $respuesta = $this->conexion->consulta_assoc($consulta);
+        $inquiry  = $this->conexion->query($query);
+        $response = $this->conexion->consulta_assoc($inquiry);
 
         $this->conexion->next_result();
 
-        if (empty($respuesta['id'])) {
-            throw new DataStatusResponse(true, 404, [], 404, "No data founded", []);
+        if (empty($response['id'])) {
+            new DataStatusResponse(true, 404, [], 404, "No data founded", []);
         }
 
-        return $respuesta;
+        return $response;
     }
 
 }
