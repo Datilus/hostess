@@ -2,7 +2,7 @@
 
 interface RestauranteRepositoryInterface
 {
-    public function save($data);
+    public function saveRestaurant($data);
 
     public function getRestaurant($data);
 }
@@ -17,7 +17,7 @@ class RestauranteRepository implements RestauranteRepositoryInterface
         $this->restauranteModel = new RestauranteModel();
     }
 
-    public function save($data): array
+    public function saveRestaurant($data): array
     {
         $key           = $data['clave'];
         $keyHotel      = $data['cve_hotel'];

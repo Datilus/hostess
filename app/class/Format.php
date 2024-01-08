@@ -47,7 +47,7 @@ class Format
         if (method_exists($this, $methodName)) {
             $this->$methodName($field, $params);
         } else {
-            throw new DataStatusResponse( true, 0, ['status_msg' => 'warning'], 400, "Validation rule {$params[0]} does not exist.", [] );
+            new DataStatusResponse( true, 0, ['status_msg' => 'warning'], 400, "Validation rule {$params[0]} does not exist.", [] );
         }
     }
 
@@ -58,7 +58,7 @@ class Format
     protected function transmuteUppercase($field, $params)
     {
         if (!is_string($this->data[$field])) 
-            throw new DataStatusResponse( true, 0, ['status_msg' => 'warning'], 400, "The {$field} must be a string.", [] );
+            new DataStatusResponse( true, 0, ['status_msg' => 'warning'], 400, "The {$field} must be a string.", [] );
         
         $this->data_response[$field] = mb_strtoupper($this->data[$field], 'UTF-8');
     }
@@ -69,7 +69,7 @@ class Format
     protected function transmuteLowercase($field, $params)
     {
         if (!is_string($this->data[$field]))
-            throw new DataStatusResponse( true, 0, ['status_msg' => 'warning'], 400, "The {$field} must be a string.",[] );
+            new DataStatusResponse( true, 0, ['status_msg' => 'warning'], 400, "The {$field} must be a string.",[] );
 
         $this->data_response[$field] = mb_strtolower($this->data[$field], 'UTF-8');
     }
@@ -109,7 +109,7 @@ class Format
     protected function transmuteNumeric($field, $params)
     {
         if (!is_numeric($this->data[$field])) 
-            throw new DataStatusResponse( true, 0, ['status_msg' => 'warning'], 400, "The {$field} must be a int.", [] );
+            new DataStatusResponse( true, 0, ['status_msg' => 'warning'], 400, "The {$field} must be a int.", [] );
         
         $this->data_response[$field] = (int) ( empty($this->data[$field]) ) ? 0 : $this->data[$field] ;
     }

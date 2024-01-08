@@ -46,7 +46,7 @@ class RestauranteService
             'cve_usuario'   => 'noSpecialCharacters'
         ]);
 
-        return $this->restauranteRepository->save($data);
+        return $this->restauranteRepository->saveRestaurant($data);
     }
 
     /**
