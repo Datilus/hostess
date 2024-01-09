@@ -28,4 +28,46 @@ class Reservacion
         }
     }
 
+    public function clave($parametersURL): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] != 'GET') {
+            new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
+        }
+        if (empty($parametersURL)) {
+            new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
+        }
+
+        $data['flag']          = 1;
+        $data['key']           = $parametersURL[0];
+        $data['keyRestaurant'] = 0;
+        $data['dateRsvn']      = "0000-00-00";
+        $data['timeRsvn']      = "00:00:00";
+        $data['keyGroup']      = 0;
+
+        $response = $this->reservacionService->getReservations($data);
+
+        new DataStatusResponse(false, 0, [], 200, 'Reservacion encontrada', $response);
+    }
+
+    public function grupo($parametersURL): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] != 'GET') {
+            new DataStatusResponse(true, 405, [], 405, "Method Not Allowed", []);
+        }
+        if (empty($parametersURL)) {
+            new DataStatusResponse(true, 400, [], 400, "Clave on URL not valid", []);
+        }
+
+        $data['flag']          = 2;
+        $data['key']           = 0;
+        $data['keyRestaurant'] = $_GET['cve_restaurante'];
+        $data['dateRsvn']      = $_GET['fecha_rsrv'];
+        $data['timeRsvn']      = $_GET['hora_rsrv'];
+        $data['keyGroup']      = $parametersURL[0];
+
+        $response = $this->reservacionService->getReservations($data);
+
+        new DataStatusResponse(false, 0, [], 200, 'Reservacion encontrada', $response);
+    }
+
 }

@@ -39,8 +39,14 @@ class ReservacionRepository implements ReservacionRepositoryInterface
             $jsonRsvnPms, $keyUser, $status);
     }
 
-    public function getReservation($data)
+    public function getReservation($data): array
     {
-        // TODO: Implement getReservation() method.
+        $response = $this->reservacionModel->getReservation($data['flag'], $data['key'], $data['keyRestaurant'],
+            $data['dateRsvn'], $data['timeRsvn'], $data['keyGroup']);
+
+        if (!empty($response[0]['JSON_ACOMPANANTES']))
+            $response[0]['JSON_ACOMPANANTES'] = json_decode($response[0]['JSON_ACOMPANANTES'], true);
+
+        return $response;
     }
 }

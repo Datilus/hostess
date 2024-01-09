@@ -52,5 +52,31 @@ class ReservacionService
         return $this->reservacionRepository->saveReservation($data);
     }
 
+    public function getReservations($data): array
+    {
+        $format = new Format($data);
+        $data   = $format->transmute([
+            'flag'          => 'numeric|trim',
+            'key'           => 'numeric|trim',
+            'keyRestaurant' => 'numeric|trim',
+            'dateRsvn'      => 'trim',
+            'timeRsvn'      => 'trim',
+            'keyGroup'      => 'numeric|trim'
+        ]);
+        $data = $format->get_data_response();
+
+        $validator = new Validator($data);
+        $validator->validate([
+            'flag'          => 'noSpecialCharacters',
+            'key'           => 'noSpecialCharacters',
+            'keyRestaurant' => 'noSpecialCharacters',
+            'dateRsvn'      => 'string',
+            'timeRsvn'      => 'string',
+            'keyGroup'      => 'noSpecialCharacters'
+        ]);
+
+        return $this->reservacionRepository->getReservation($data);
+    }
+
 
 }

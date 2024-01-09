@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ecd2023-96af-47a2-b726-9ccad93cce17" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/hostess.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/class/Format.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/class/Format.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/UsuarioController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/UsuarioController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/core/ConexionBD.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/ConexionBD.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/UsuarioService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/UsuarioService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/ReservacionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/ReservacionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/ReservacionModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/ReservacionModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/repositories/ReservacionRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/repositories/ReservacionRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/ReservacionService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/ReservacionService.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,22 +30,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "firstBranch",
-    "last_opened_file_path": "C:/xampp/htdocs/APIS/logIn",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "php.override.implement.member.chooser.php.doc": "NONE",
-    "settings.editor.selected.configurable": "preferences.sourceCode.PHP",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;firstBranch&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/xampp/htdocs/APIS/logIn&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;php.override.implement.member.chooser.php.doc&quot;: &quot;NONE&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.PHP&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -70,6 +65,7 @@
       <workItem from="1704297306325" duration="527000" />
       <workItem from="1704297881696" duration="101000" />
       <workItem from="1704298012208" duration="32746000" />
+      <workItem from="1704731177033" duration="11337000" />
     </task>
     <servers />
   </component>
