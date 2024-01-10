@@ -69,4 +69,26 @@ class RestauranteService
 
         return $this->restauranteRepository->getRestaurant($data);
     }
+
+    public function dataListRestaurants(array $data): array
+    {
+        $format = new Format($data);
+        $data   = $format->transmute([
+            'flag'   => 'numeric|trim',
+            'row'    => 'numeric|trim',
+            'rows'   => 'numeric|trim',
+            'search' => 'trim'
+        ]);
+        $data   = $format->get_data_response();
+
+        $validator = new Validator($data);
+        $validator->validate([
+            'flag'   => 'noSpecialCharacters',
+            'row'    => 'noSpecialCharacters',
+            'rows'   => 'noSpecialCharacters',
+            'search' => 'noSpecialCharacters'
+        ]);
+
+        return $this->restauranteRepository->dataListRestaurant($data);
+    }
 }

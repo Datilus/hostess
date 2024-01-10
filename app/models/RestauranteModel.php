@@ -59,4 +59,25 @@ class RestauranteModel
         return $response;
     }
 
+    public function dataListRestaurant($flag, $row, $rows, $search): array
+    {
+        $query = "CALL DATALIST_RESTAURANTES(
+            '$flag', 
+            '$row', 
+            '$rows', 
+            '$search'
+        )";
+
+        $inquiry  = $this->conexionBD->query($query);
+        $response = $this->conexionBD->consulta_array($inquiry);
+
+        $this->conexionBD->next_result();
+
+        if (empty($response)) {
+            new DataStatusResponse(true, 404, [], 404, "No data founded", []);
+        }
+
+        return $response;
+    }
+
 }

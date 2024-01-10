@@ -44,4 +44,9 @@ class RestauranteRepository implements RestauranteRepositoryInterface
     {
         return $this->restauranteModel->getRestaurant($data['flag'], $data['key']);
     }
+
+    public function dataListRestaurant($data): array
+    {
+        return $this->restauranteModel->dataListRestaurant($data['flag'], $data['row'], $data['rows'], $data['search']);
+    }
 }
